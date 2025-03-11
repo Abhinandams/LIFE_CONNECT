@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+<b><h1> **LifeConnect - Emergency Response System 🚑🩸**</b></h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **Project Overview**  
+LifeConnect is an emergency response system designed to assist users in **blood donation requests** and **accident reporting**. It features a **React-based frontend** and a **Firebase-powered backend**, ensuring real-time assistance and seamless communication.  
 
-## Available Scripts
+Additionally, LifeConnect includes an **AI Chatbot powered by Gemini API**, allowing users to ask queries related to blood requirements and accident reporting.  
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## **🚀 Features**  
+### **🩸 Blood Requirements Module**  
+- Search for blood donors based on type and location.  
+- Request blood donations and notify nearby donors.  
+- Check real-time blood bank availability.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **🚑 Accident Reporting Module**  
+- Report accidents and provide location details.  
+- Notify emergency contacts automatically using **Firebase Cloud Messaging (FCM)**.  
+- Connect to ambulance, police, and fire services.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **🤖 AI Chatbot (Gemini API)**  
+- Answers user queries related to blood requirements and accident reporting.  
+- Provides real-time information and guidance.  
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **🛠 Tech Stack**  
+### **Frontend:**  
+- React  
+- HTML, CSS, JavaScript  
 
-### `npm run build`
+### **Backend:**  
+- Firebase (Firestore, Authentication, Cloud Functions, Cloud Messaging)  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **AI & Integrations:**  
+- **Gemini API** (Chatbot for queries)  
+- **Google Maps API** (Location tracking for accident reporting)  
+- **Firebase Cloud Messaging (FCM)** (Emergency alerts)  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **🛠 Setup Instructions**  
 
-### `npm run eject`
+### **1. Clone the Repository**  
+```sh
+git clone https://github.com/your-repo/LifeConnect.git
+cd LifeConnect
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## **📌 Backend Setup (Firebase)**  
+1. Create a Firebase project in the **[Firebase Console](https://console.firebase.google.com/)**.  
+2. Enable **Authentication, Firestore, Cloud Functions, and Cloud Messaging (FCM)**.  
+3. Download the `firebase-config.js` file and place it in `/backend`.  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **Install Firebase CLI and Deploy**  
+```sh
+npm install -g firebase-tools
+firebase login
+cd backend
+firebase init
+firebase deploy
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## **📌 Frontend Setup (React)**  
+1. Navigate to the frontend directory and install dependencies:  
+   ```sh
+   cd frontend
+   npm install
+   ```  
+2. Add Firebase credentials to a `.env` file.  
+3. Start the development server:  
+   ```sh
+   npm start
+   ```  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## **🚀 Running the Application**  
+1. Ensure both **backend (Firebase)** and **frontend (React)** are set up.  
+2. Open in browser:  
+   ```sh
+   http://localhost:3000
+   ```  
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## **🙌 Acknowledgements**  
+- **Firebase** for backend infrastructure and Cloud Messaging (FCM).  
+- **Gemini API** for AI chatbot functionality.  
+- **Google Maps API** for location tracking in accident reporting.  
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
