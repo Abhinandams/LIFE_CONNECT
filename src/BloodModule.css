@@ -1,0 +1,141 @@
+.blood-module {
+
+    text-align: center;
+
+    padding: 20px;
+
+    max-width: 500px;
+
+    margin: 10px;
+
+  }
+
+  
+
+  h2 {
+
+    color: #d43f3f;
+
+  }
+
+  
+
+  h3 {
+
+    color: #444;
+
+  }
+
+  
+
+  .form-section {
+
+    background: #e4402a;
+
+    padding: 15px;
+
+    margin: 15px 0;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  }
+
+  
+
+  input, select {
+
+    width: 100%;
+
+    padding: 800px;
+
+    margin: 5px 0;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+  }
+
+  
+
+  button {
+
+    padding: 12px 20px;
+
+    background-color: #ff4d4d;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    margin: 10px;
+
+  }
+
+  
+
+  button:hover {
+
+    background-color: #d43f3f;
+
+  }
+
+  .blood-request-btn {
+
+    margin-right: 20px;
+
+  }
+
+  .blood-module {
+    text-align: center;
+    padding: 20px;
+    max-width: 500px;
+    margin: 10px;
+  }
+  
+  h2 {
+    color: #d43f3f;
+  }
+  
+  h3 {
+    color: #444;
+  }
+  
+  .form-section {
+    background: #e4402a;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 800px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 12px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:hover {
+    background-color: #d43f3f;
+  }
+  .blood-request-btn {
+    margin-right: 20px;
+  }
