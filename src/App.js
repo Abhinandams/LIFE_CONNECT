@@ -9,6 +9,7 @@ import AccidentReports from "./pages/AccidentReports";  // ✅ Updated path
 import Profile from "./pages/Profile";  // ✅ Ensure correct path
 import { auth } from "./firebase";
 import { useState, useEffect } from "react";
+import "../styles/App.css";
 
 function App() {
   const [user, setUser] = useState(null);
