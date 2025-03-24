@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { db } from "../firebase";
-import { collection, addDoc, getDocs, query, where, GeoPoint } from "firebase/firestore";
+import { db, storage } from "../firebase";
+import { collection, addDoc, GeoPoint } from "firebase/firestore";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "../styles/AccidentReporting.css";
@@ -33,8 +34,7 @@ const AccidentReporting = () => {
   const [image, setImage] = useState(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [useFrontCamera, setUseFrontCamera] = useState(false);
-  const [showOverview, setShowOverview] = useState(false); // Overview modal state
-  const [notificationStatus, setNotificationStatus] = useState(null);
+  const [showOverview, setShowOverview] = useState(false);
   const [isNotifying, setIsNotifying] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -47,7 +47,6 @@ const AccidentReporting = () => {
         setLatLng([latitude, longitude]);
         setLocation(`Lat: ${latitude}, Lng: ${longitude}`);
 
-        // Fetch address using OpenStreetMap API
         try {
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
@@ -99,228 +98,46 @@ const AccidentReporting = () => {
 
     setImage(canvas.toDataURL("image/jpeg"));
 
-    // Stop camera stream
     if (video.srcObject) {
       video.srcObject.getTracks().forEach((track) => track.stop());
     }
     setIsCameraOpen(false);
   };
 
-  // Calculate distance between two points in km using Haversine formula
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Radius of the earth in km
-    const dLat = deg2rad(lat2 - lat1);
-    const dLon = deg2rad(lon2 - lon1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c; // Distance in km
-    return d;
-  };
-
-  const deg2rad = (deg) => {
-    return deg * (Math.PI / 180);
-  };
-
-  // Find nearby emergency services
-  const findNearbyServices = async (latitude, longitude, maxDistance = 10) => {
-    const services = {
-      hospitals: [],
-      ambulances: [],
-      police: []
-    };
-
-    try {
-      // Query hospitals collection
-      const hospitalsSnapshot = await getDocs(collection(db, "hospitals"));
-      hospitalsSnapshot.forEach(doc => {
-        const hospital = doc.data();
-        // Check if hospital has location data
-        if (hospital.location) {
-          const distance = calculateDistance(
-            latitude, 
-            longitude, 
-            hospital.location.split(",")[0], 
-            hospital.location.split(",")[1]
-          );
-          
-          if (distance <= maxDistance) {
-            services.hospitals.push({
-              id: doc.id,
-              name: hospital.name,
-              contact: hospital.contact,
-              email: hospital.email,
-              distance: distance.toFixed(2)
-            });
-          }
-        }
-      });
-
-      // Query ambulances collection
-      const ambulancesSnapshot = await getDocs(collection(db, "ambulances"));
-      ambulancesSnapshot.forEach(doc => {
-        const ambulance = doc.data();
-        if (ambulance.location) {
-          const distance = calculateDistance(
-            latitude, 
-            longitude, 
-            ambulance.location.split(",")[0], 
-            ambulance.location.split(",")[1]
-          );
-          
-          if (distance <= maxDistance) {
-            services.ambulances.push({
-              id: doc.id,
-              name: ambulance.name || "Ambulance Unit",
-              contact: ambulance.contact,
-              distance: distance.toFixed(2)
-            });
-          }
-        }
-      });
-
-      // Query police collection
-      const policeSnapshot = await getDocs(collection(db, "police"));
-      policeSnapshot.forEach(doc => {
-        const police = doc.data();
-        if (police.location) {
-          const distance = calculateDistance(
-            latitude, 
-            longitude, 
-            police.location.split(",")[0], 
-            police.location.split(",")[1]
-          );
-          
-          if (distance <= maxDistance) {
-            services.police.push({
-              id: doc.id,
-              name: police.name || "Police Station",
-              contact: police.contact,
-              distance: distance.toFixed(2)
-            });
-          }
-        }
-      });
-
-      return services;
-    } catch (error) {
-      console.error("Error finding nearby services:", error);
-      throw error;
-    }
-  };
-
-  // Send notifications to emergency services
-  const sendEmergencyNotifications = async (reportId, services) => {
-    const timestamp = new Date();
-    const notifications = [];
-
-    // Create notification for each hospital
-    for (const hospital of services.hospitals) {
-      notifications.push(
-        addDoc(collection(db, "notifications"), {
-          recipient: "hospital",
-          recipientId: hospital.id,
-          reportId: reportId,
-          type: "emergency",
-          title: "Emergency: Accident Reported Nearby",
-          message: `An accident has been reported ${hospital.distance}km from your location at ${locationName}. Immediate assistance may be required.`,
-          location: location,
-          locationName: locationName,
-          status: "unread",
-          timestamp: timestamp
-        })
-      );
-    }
-
-    // Create notification for each ambulance
-    for (const ambulance of services.ambulances) {
-      notifications.push(
-        addDoc(collection(db, "notifications"), {
-          recipient: "ambulance",
-          recipientId: ambulance.id,
-          reportId: reportId,
-          type: "emergency",
-          title: "Emergency: Accident Reported - Medical Assistance Needed",
-          message: `An accident has been reported ${ambulance.distance}km from your location at ${locationName}. Please respond immediately.`,
-          location: location,
-          locationName: locationName,
-          status: "unread",
-          timestamp: timestamp
-        })
-      );
-    }
-
-    // Create notification for each police station
-    for (const police of services.police) {
-      notifications.push(
-        addDoc(collection(db, "notifications"), {
-          recipient: "police",
-          recipientId: police.id,
-          reportId: reportId,
-          type: "emergency",
-          title: "Emergency: Accident Reported - Police Assistance Needed",
-          message: `An accident has been reported ${police.distance}km from your location at ${locationName}. Please respond immediately.`,
-          location: location,
-          locationName: locationName,
-          status: "unread",
-          timestamp: timestamp
-        })
-      );
-    }
-
-    // Wait for all notifications to be sent
-    await Promise.all(notifications);
-    return {
-      hospitalsNotified: services.hospitals.length,
-      ambulancesNotified: services.ambulances.length,
-      policeNotified: services.police.length,
-      totalNotified: services.hospitals.length + services.ambulances.length + services.police.length
-    };
-  };
-
-  // Show Overview Modal Before Submission
-  const showOverviewModal = (e) => {
-    e.preventDefault();
-    if (!image) {
-      alert("Please capture an image before submitting.");
+  // Handle Form Submission (Upload image & store report in Firestore)
+  const handleSubmit = async () => {
+    if (!description || !contact || !image) {
+      alert("Please fill all fields and capture an image before submitting.");
       return;
     }
-    setShowOverview(true);
-  };
 
-  // Handle Form Submission
-  const handleSubmit = async () => {
     setIsNotifying(true);
     try {
-      // 1. Save accident report first
-      const reportRef = await addDoc(collection(db, "accidentReports"), {
+      let imageUrl = null;
+
+      // 1. Upload image to Firebase Storage
+      if (image) {
+        const storageRef = ref(storage, `accidentReports/${Date.now()}.jpg`);
+        const snapshot = await uploadString(storageRef, image, "data_url");
+        imageUrl = await getDownloadURL(snapshot.ref);
+      }
+
+      // 2. Save accident report with image URL
+      await addDoc(collection(db, "accidentReports"), {
         location,
         locationName,
         description,
         contact,
-        imageUrl: image,
+        imageUrl,
         timestamp: new Date(),
-        // Add a GeoPoint for better geospatial queries in the future
         geoPoint: new GeoPoint(latlng[0], latlng[1])
       });
 
-      // 2. Find nearby emergency services
-      const nearbyServices = await findNearbyServices(latlng[0], latlng[1]);
-      
-      // 3. Send notifications to those services
-      const notificationResults = await sendEmergencyNotifications(
-        reportRef.id, 
-        nearbyServices
-      );
-
-      setNotificationStatus(notificationResults);
-      alert(`Accident Report Submitted Successfully! Notified ${notificationResults.totalNotified} emergency services.`);
+      alert("Accident Report Submitted Successfully!");
       navigate("/accident-reports");
     } catch (error) {
       console.error("Error submitting accident report:", error);
-      setNotificationStatus({ error: "Failed to notify emergency services" });
+      alert("Failed to submit report.");
     } finally {
       setIsNotifying(false);
     }
@@ -329,7 +146,7 @@ const AccidentReporting = () => {
   return (
     <div className="report-container">
       <h2>Report an Accident</h2>
-      <form onSubmit={showOverviewModal}>
+      <form onSubmit={(e) => { e.preventDefault(); setShowOverview(true); }}>
         <label>Location:</label>
         <input type="text" value={location} readOnly />
         <button type="button" onClick={getLocation}>Use Current Location</button>
@@ -370,7 +187,6 @@ const AccidentReporting = () => {
         <button type="submit">Submit Report</button>
       </form>
 
-      {/* Overview Modal */}
       {showOverview && (
         <div className="modal-overlay">
           <div className="modal">
@@ -380,28 +196,10 @@ const AccidentReporting = () => {
             <p><strong>Description:</strong> {description}</p>
             <p><strong>Contact:</strong> {contact}</p>
             {image && <img src={image} alt="Preview" style={{ width: "100%", marginTop: "10px" }} />}
-            
-            {isNotifying && <p className="notification-status">Notifying emergency services...</p>}
-            
-            {notificationStatus && !notificationStatus.error && (
-              <div className="notification-results">
-                <p><strong>Emergency Services Notified:</strong></p>
-                <p>Hospitals: {notificationStatus.hospitalsNotified}</p>
-                <p>Ambulances: {notificationStatus.ambulancesNotified}</p>
-                <p>Police Stations: {notificationStatus.policeNotified}</p>
-              </div>
-            )}
-            
-            {notificationStatus && notificationStatus.error && (
-              <p className="notification-error">{notificationStatus.error}</p>
-            )}
-            
-            <div className="modal-buttons">
-              <button onClick={handleSubmit} disabled={isNotifying}>
-                {isNotifying ? "Notifying Services..." : "Confirm & Submit"}
-              </button>
-              <button onClick={() => setShowOverview(false)} disabled={isNotifying}>Cancel</button>
-            </div>
+            <button onClick={handleSubmit} disabled={isNotifying}>
+              {isNotifying ? "Submitting..." : "Confirm & Submit"}
+            </button>
+            <button onClick={() => setShowOverview(false)}>Cancel</button>
           </div>
         </div>
       )}
