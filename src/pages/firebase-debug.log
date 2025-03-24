@@ -1,0 +1,138 @@
+[debug] [2025-03-24T05:32:40.091Z] ----------------------------------------------------------------------
+[debug] [2025-03-24T05:32:40.097Z] Command:       C:\nvm4w\nodejs\node.exe C:\Users\aders\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting --debug
+[debug] [2025-03-24T05:32:40.097Z] CLI Version:   13.35.1
+[debug] [2025-03-24T05:32:40.098Z] Platform:      win32
+[debug] [2025-03-24T05:32:40.098Z] Node Version:  v20.15.0
+[debug] [2025-03-24T05:32:40.098Z] Time:          Mon Mar 24 2025 11:02:40 GMT+0530 (India Standard Time)
+[debug] [2025-03-24T05:32:40.098Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-03-24T05:32:40.128Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-03-24T05:32:40.744Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-03-24T05:32:40.746Z] > authorizing via signed-in user (adersha2255@gmail.com)
+[debug] [2025-03-24T05:32:40.748Z] [iam] checking project lifeconnectapp-d69ce for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-03-24T05:32:40.750Z] Checked if tokens are valid: false, expires at: 1742751242886
+[debug] [2025-03-24T05:32:40.751Z] Checked if tokens are valid: false, expires at: 1742751242886
+[debug] [2025-03-24T05:32:40.752Z] > refreshing access token with scopes: []
+[debug] [2025-03-24T05:32:40.755Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-03-24T05:32:40.756Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-24T05:32:41.516Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-03-24T05:32:41.518Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-03-24T05:32:41.586Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/lifeconnectapp-d69ce:testIamPermissions [none]
+[debug] [2025-03-24T05:32:41.588Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/lifeconnectapp-d69ce:testIamPermissions x-goog-quota-user=projects/lifeconnectapp-d69ce
+[debug] [2025-03-24T05:32:41.589Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lifeconnectapp-d69ce:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-03-24T05:32:41.766Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-03-24T05:32:41.767Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-03-24T05:32:43.753Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/lifeconnectapp-d69ce:testIamPermissions 200
+[debug] [2025-03-24T05:32:43.754Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lifeconnectapp-d69ce:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-03-24T05:32:43.756Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:43.757Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:43.759Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/lifeconnectapp-d69ce [none]
+[debug] [2025-03-24T05:32:44.300Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/lifeconnectapp-d69ce 200
+[debug] [2025-03-24T05:32:44.301Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/lifeconnectapp-d69ce {"projectId":"lifeconnectapp-d69ce","projectNumber":"707256815512","displayName":"lifeconnectApp","name":"projects/lifeconnectapp-d69ce","resources":{"hostingSite":"lifeconnectapp-d69ce"},"state":"ACTIVE","etag":"1_131f1e77-c884-4ddf-b5e7-cecb81543ae4"}
+[info] 
+[info] === Deploying to 'lifeconnectapp-d69ce'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-03-24T05:32:44.323Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:44.325Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:44.327Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions [none]
+[debug] [2025-03-24T05:32:44.329Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2025-03-24T05:32:45.778Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions 200
+[debug] [2025-03-24T05:32:45.779Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions {"name":"projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[lifeconnectapp-d69ce]: beginning deploy... 
+[info] i  hosting[lifeconnectapp-d69ce]: found 14 files in build 
+[debug] [2025-03-24T05:32:45.835Z] [hosting] uploading with 200 concurrency
+[debug] [2025-03-24T05:32:46.530Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:46.531Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:46.534Z] [hosting] hash cache [YnVpbGQ] stored for 14 files
+[debug] [2025-03-24T05:32:46.535Z] [hosting][hash queue][FINAL] {"max":656,"min":5,"avg":66.64285714285714,"active":0,"complete":14,"success":14,"errored":0,"retried":0,"total":14,"elapsed":666}
+[debug] [2025-03-24T05:32:46.537Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4:populateFiles [none]
+[debug] [2025-03-24T05:32:46.538Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4:populateFiles {"files":{"/robots.txt":"b2090cf9761ef60aa06e4fab97679bd43dfa5e5df073701ead5879d7c68f1ec5","/manifest.json":"4368aeaf848ae2e048765562c289452f33ad2a175c4b1951ea8bdf2ada0d5b10","/logo512.png":"212b102aa09e51b3b3e06647e81f7801a61333e171f6582e8124379aabccb41d","/logo192.png":"79e2b749561016bc8af300ea19f48347ceed3cb1a54f48ae456172eca45e08f0","/favicon.ico":"27edce7be5922cf0bef7d4136f69b5bfbdd5bf8c13c7b026f71187d41a00aa7d","/asset-manifest.json":"8b20dfbe5cf82f6469422db8e5e8ce10602993c5a52d6276246d63c06e2f43e2","/static/js/main.224b858a.js.LICENSE.txt":"5c10a9332116f76279354a3e7d74a126bff42b7d970bf73c354b0ec16481e34d","/index.html":"72c8443ceed5106b6c2f002556d303da0b030242bca2f4f829e98275108805a7","/static/js/453.cc920df9.chunk.js":"4cb0618462abeff85226a4a5130fbfe97c0d0a180056d43f553dd65f1ce71f69","/static/js/453.cc920df9.chunk.js.map":"5cf608c03b74b128a13f7175d6bf96ed81178a1a238cefbda7c96f93fcea87e5","/static/css/main.e6df1a7d.css":"e74c4d2d969369b521ecfe5493ccb76f116f1ea5eacd12a308a5e959304b9ae4","/static/css/main.e6df1a7d.css.map":"dbb1aae8025cc5b3547611382f4118620038ed7c9347b12cbc60b21d897a66d5","/static/js/main.224b858a.js":"b67a82a611872383844ab5826b023989ef19c5859f7e4aef2a0bf65b298db68a","/static/js/main.224b858a.js.map":"fff2f7bcca9d8310c6885bbc3b8e2846ade10b266453d3299bee96b3bb8aff59"}}
+[debug] [2025-03-24T05:32:47.337Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4:populateFiles 200
+[debug] [2025-03-24T05:32:47.338Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4:populateFiles {"uploadRequiredHashes":["dbb1aae8025cc5b3547611382f4118620038ed7c9347b12cbc60b21d897a66d5","fff2f7bcca9d8310c6885bbc3b8e2846ade10b266453d3299bee96b3bb8aff59","8b20dfbe5cf82f6469422db8e5e8ce10602993c5a52d6276246d63c06e2f43e2","b67a82a611872383844ab5826b023989ef19c5859f7e4aef2a0bf65b298db68a","72c8443ceed5106b6c2f002556d303da0b030242bca2f4f829e98275108805a7","e74c4d2d969369b521ecfe5493ccb76f116f1ea5eacd12a308a5e959304b9ae4"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files"}
+[debug] [2025-03-24T05:32:47.343Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.344Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.345Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.346Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.348Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.348Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.349Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.350Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.351Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.352Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.353Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.354Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:47.355Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/dbb1aae8025cc5b3547611382f4118620038ed7c9347b12cbc60b21d897a66d5 [none]
+[debug] [2025-03-24T05:32:47.356Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/dbb1aae8025cc5b3547611382f4118620038ed7c9347b12cbc60b21d897a66d5 [stream]
+[debug] [2025-03-24T05:32:47.361Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/fff2f7bcca9d8310c6885bbc3b8e2846ade10b266453d3299bee96b3bb8aff59 [none]
+[debug] [2025-03-24T05:32:47.363Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/fff2f7bcca9d8310c6885bbc3b8e2846ade10b266453d3299bee96b3bb8aff59 [stream]
+[debug] [2025-03-24T05:32:47.368Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/8b20dfbe5cf82f6469422db8e5e8ce10602993c5a52d6276246d63c06e2f43e2 [none]
+[debug] [2025-03-24T05:32:47.369Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/8b20dfbe5cf82f6469422db8e5e8ce10602993c5a52d6276246d63c06e2f43e2 [stream]
+[debug] [2025-03-24T05:32:47.375Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/b67a82a611872383844ab5826b023989ef19c5859f7e4aef2a0bf65b298db68a [none]
+[debug] [2025-03-24T05:32:47.377Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/b67a82a611872383844ab5826b023989ef19c5859f7e4aef2a0bf65b298db68a [stream]
+[debug] [2025-03-24T05:32:47.385Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/72c8443ceed5106b6c2f002556d303da0b030242bca2f4f829e98275108805a7 [none]
+[debug] [2025-03-24T05:32:47.387Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/72c8443ceed5106b6c2f002556d303da0b030242bca2f4f829e98275108805a7 [stream]
+[debug] [2025-03-24T05:32:47.391Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/e74c4d2d969369b521ecfe5493ccb76f116f1ea5eacd12a308a5e959304b9ae4 [none]
+[debug] [2025-03-24T05:32:47.393Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/e74c4d2d969369b521ecfe5493ccb76f116f1ea5eacd12a308a5e959304b9ae4 [stream]
+[debug] [2025-03-24T05:32:47.397Z] [hosting][populate queue][FINAL] {"max":825,"min":825,"avg":825,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":867}
+[debug] [2025-03-24T05:32:47.398Z] [hosting] uploads queued: 6
+[info] i  hosting: uploading new files [0/6] (0%) 
+[debug] [2025-03-24T05:32:49.009Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/e74c4d2d969369b521ecfe5493ccb76f116f1ea5eacd12a308a5e959304b9ae4 200
+[debug] [2025-03-24T05:32:49.010Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/e74c4d2d969369b521ecfe5493ccb76f116f1ea5eacd12a308a5e959304b9ae4 [stream]
+[debug] [2025-03-24T05:32:49.038Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/dbb1aae8025cc5b3547611382f4118620038ed7c9347b12cbc60b21d897a66d5 200
+[debug] [2025-03-24T05:32:49.039Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/dbb1aae8025cc5b3547611382f4118620038ed7c9347b12cbc60b21d897a66d5 [stream]
+[debug] [2025-03-24T05:32:49.350Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/72c8443ceed5106b6c2f002556d303da0b030242bca2f4f829e98275108805a7 200
+[debug] [2025-03-24T05:32:49.351Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/72c8443ceed5106b6c2f002556d303da0b030242bca2f4f829e98275108805a7 [stream]
+[debug] [2025-03-24T05:32:49.354Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/8b20dfbe5cf82f6469422db8e5e8ce10602993c5a52d6276246d63c06e2f43e2 200
+[debug] [2025-03-24T05:32:49.355Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/8b20dfbe5cf82f6469422db8e5e8ce10602993c5a52d6276246d63c06e2f43e2 [stream]
+[debug] [2025-03-24T05:32:49.359Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/b67a82a611872383844ab5826b023989ef19c5859f7e4aef2a0bf65b298db68a 200
+[debug] [2025-03-24T05:32:49.360Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/b67a82a611872383844ab5826b023989ef19c5859f7e4aef2a0bf65b298db68a [stream]
+[debug] [2025-03-24T05:32:49.773Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/fff2f7bcca9d8310c6885bbc3b8e2846ade10b266453d3299bee96b3bb8aff59 200
+[debug] [2025-03-24T05:32:49.774Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4/files/fff2f7bcca9d8310c6885bbc3b8e2846ade10b266453d3299bee96b3bb8aff59 [stream]
+[debug] [2025-03-24T05:32:49.775Z] [hosting][upload queue][FINAL] {"max":2431,"min":1658,"avg":1968.3333333333333,"active":0,"complete":6,"success":6,"errored":0,"retried":0,"total":6,"elapsed":2434}
+[info] i  hosting: upload complete 
+[info] +  hosting[lifeconnectapp-d69ce]: file upload complete 
+[debug] [2025-03-24T05:32:49.779Z] [hosting] deploy completed after 3990ms
+[debug] [2025-03-24T05:32:49.780Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "lifeconnectapp-d69ce"
+    },
+    "version": "projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4"
+  }
+]
+[info] i  hosting[lifeconnectapp-d69ce]: finalizing version... 
+[debug] [2025-03-24T05:32:49.797Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:49.798Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:49.800Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4 updateMask=status%2Cconfig
+[debug] [2025-03-24T05:32:49.802Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2025-03-24T05:32:50.696Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4 200
+[debug] [2025-03-24T05:32:50.698Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4 {"name":"projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2025-03-24T05:32:45.980448Z","createUser":{"email":"adersha2255@gmail.com"},"finalizeTime":"2025-03-24T05:32:51.068328Z","finalizeUser":{"email":"adersha2255@gmail.com"}}
+[debug] [2025-03-24T05:32:50.699Z] [hosting] finalized version for lifeconnectapp-d69ce:[object Object]
+[info] +  hosting[lifeconnectapp-d69ce]: version finalized 
+[info] i  hosting[lifeconnectapp-d69ce]: releasing new version... 
+[debug] [2025-03-24T05:32:50.702Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:50.703Z] Checked if tokens are valid: true, expires at: 1742797960519
+[debug] [2025-03-24T05:32:50.704Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/channels/live/releases versionName=projects%2F707256815512%2Fsites%2Flifeconnectapp-d69ce%2Fversions%2Fde840e4ee528b5c4
+[debug] [2025-03-24T05:32:50.705Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/channels/live/releases {}
+[debug] [2025-03-24T05:32:51.278Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/channels/live/releases 200
+[debug] [2025-03-24T05:32:51.281Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/lifeconnectapp-d69ce/channels/live/releases {"name":"projects/707256815512/sites/lifeconnectapp-d69ce/channels/live/releases/1742794371117000","version":{"name":"projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2025-03-24T05:32:45.980448Z","createUser":{"email":"adersha2255@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocL06iGyCpMsqTOPnMCGsR3mxkonm2GLwqKLW9s2gzoQESW4v9c"},"finalizeTime":"2025-03-24T05:32:51.068328Z","finalizeUser":{"email":"adersha2255@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocL06iGyCpMsqTOPnMCGsR3mxkonm2GLwqKLW9s2gzoQESW4v9c"}},"type":"DEPLOY","releaseTime":"2025-03-24T05:32:51.117Z","releaseUser":{"email":"adersha2255@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocL06iGyCpMsqTOPnMCGsR3mxkonm2GLwqKLW9s2gzoQESW4v9c"}}
+[debug] [2025-03-24T05:32:51.283Z] [hosting] release: {"name":"projects/707256815512/sites/lifeconnectapp-d69ce/channels/live/releases/1742794371117000","version":{"name":"projects/707256815512/sites/lifeconnectapp-d69ce/versions/de840e4ee528b5c4","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2025-03-24T05:32:45.980448Z","createUser":{"email":"adersha2255@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocL06iGyCpMsqTOPnMCGsR3mxkonm2GLwqKLW9s2gzoQESW4v9c"},"finalizeTime":"2025-03-24T05:32:51.068328Z","finalizeUser":{"email":"adersha2255@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocL06iGyCpMsqTOPnMCGsR3mxkonm2GLwqKLW9s2gzoQESW4v9c"}},"type":"DEPLOY","releaseTime":"2025-03-24T05:32:51.117Z","releaseUser":{"email":"adersha2255@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocL06iGyCpMsqTOPnMCGsR3mxkonm2GLwqKLW9s2gzoQESW4v9c"}}
+[info] +  hosting[lifeconnectapp-d69ce]: release complete 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/lifeconnectapp-d69ce/overview
+[info] Hosting URL: https://lifeconnectapp-d69ce.web.app
