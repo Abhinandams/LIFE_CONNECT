@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
-// import "./AccidentReports.css";
+import { db, auth } from "../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const AccidentReports = () => {
   const [reports, setReports] = useState([]);
+  const user = auth.currentUser;
 
   useEffect(() => {
+    if (!user) return;
+    
     const fetchReports = async () => {
-      const snapshot = await getDocs(collection(db, "accidentReports"));
+      const q = query(collection(db, "accidentReports"), where("userEmail", "==", user.email));
+      const snapshot = await getDocs(q);
       const reportsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setReports(reportsData);
     };
+    
     fetchReports();
-  }, []);
+  }, [user]);
 
   return (
     <div className="reports-container">
@@ -27,7 +31,6 @@ const AccidentReports = () => {
         </div>
       ))}
     </div>
-
   );
 };
 

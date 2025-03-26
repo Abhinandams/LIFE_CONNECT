@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import { db, storage } from "../firebase";
+import { db, storage, auth } from "../firebase";
 import { collection, addDoc, GeoPoint } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import "leaflet/dist/leaflet.css";
@@ -15,7 +15,6 @@ const customIcon = new L.Icon({
   iconAnchor: [12, 41],
 });
 
-// Component to update map dynamically
 const MapUpdater = ({ latlng }) => {
   const map = useMap();
   useEffect(() => {
@@ -38,6 +37,8 @@ const AccidentReporting = () => {
   const [isNotifying, setIsNotifying] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const user = auth.currentUser;
 
   // Get User's Location
   const getLocation = () => {
@@ -104,10 +105,15 @@ const AccidentReporting = () => {
     setIsCameraOpen(false);
   };
 
-  // Handle Form Submission (Upload image & store report in Firestore)
+  // Handle Form Submission
   const handleSubmit = async () => {
     if (!description || !contact || !image) {
       alert("Please fill all fields and capture an image before submitting.");
+      return;
+    }
+
+    if (!user) {
+      alert("You must be logged in to submit a report.");
       return;
     }
 
@@ -122,7 +128,7 @@ const AccidentReporting = () => {
         imageUrl = await getDownloadURL(snapshot.ref);
       }
 
-      // 2. Save accident report with image URL
+      // 2. Save accident report with user email
       await addDoc(collection(db, "accidentReports"), {
         location,
         locationName,
@@ -130,10 +136,12 @@ const AccidentReporting = () => {
         contact,
         imageUrl,
         timestamp: new Date(),
-        geoPoint: new GeoPoint(latlng[0], latlng[1])
+        geoPoint: new GeoPoint(latlng[0], latlng[1]),
+        userEmail: user.email, // Associate report with the logged-in user
       });
 
       alert("Accident Report Submitted Successfully!");
+      setShowOverview(false);
       navigate("/accident-reports");
     } catch (error) {
       console.error("Error submitting accident report:", error);
@@ -184,7 +192,7 @@ const AccidentReporting = () => {
 
         {image && <img src={image} alt="Captured preview" style={{ width: "100%", marginTop: "10px" }} />}
 
-        <button type="submit">Submit Report</button>
+        <button type="submit">Preview & Submit</button>
       </form>
 
       {showOverview && (
@@ -203,7 +211,7 @@ const AccidentReporting = () => {
           </div>
         </div>
       )}
-    </div>
+    </div>  
   );
 };
 
