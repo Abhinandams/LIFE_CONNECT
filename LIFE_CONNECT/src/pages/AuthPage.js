@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword,
+  sendEmailVerification 
+} from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import '../styles/AuthPage.css';
@@ -19,29 +23,57 @@ const AuthPage = () => {
     try {
       let userCredential;
       if (isRegister) {
+        // Create user with email and password
         userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         
-        const userData = { email, role };
+        // Prepare user data
+        const userData = { 
+          email, 
+          role, 
+          emailVerified: false // Add a flag to track email verification
+        };
+
+        // Add extra details for non-user roles
         if (role !== "user") {
           userData.name = extraDetails.name;
           userData.location = extraDetails.location;
           userData.contactNumber = extraDetails.contactNumber;
         }
 
-        // Store data in separate Firestore collections based on role
+        // Determine collection based on role
         let collectionName = "users";
         if (role === "hospital") collectionName = "hospitals";
         else if (role === "police") collectionName = "police";
         else if (role === "ambulance") collectionName = "ambulances";
 
+        // Store user data in Firestore
         await setDoc(doc(db, collectionName, user.uid), userData);
+
+        // Send email verification
+        await sendEmailVerification(user);
+
+        // First alert to check email
+        alert("Please check your email to verify your account. Click the verification link to complete registration.");
+
+        // Simulate a small delay before showing registration success message
+        setTimeout(() => {
+          alert("Registration successful!");
+        }, 1000);
       } else {
+        // Login process
         userCredential = await signInWithEmailAndPassword(auth, email, password);
+        
+        // Check if email is verified
+        if (!userCredential.user.emailVerified) {
+          alert("Please verify your email before logging in.");
+          await auth.signOut(); // Sign out unverified user
+          return;
+        }
+        
+        alert(`Welcome, ${email}!`);
+        navigate("/");
       }
-      
-      alert(`Welcome, ${email}!`);
-      navigate("/");
     } catch (error) {
       alert(error.message);
     }
