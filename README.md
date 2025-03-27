@@ -17,11 +17,6 @@ Additionally, LifeConnect includes an **AI Chatbot powered by Gemini API**, allo
 - Report accidents and provide location details.  
 - Notify emergency contacts automatically using **Firebase Cloud Messaging (FCM)**.  
 - Connect to ambulance, police, and fire services.  
-
-### **🤖 AI Chatbot (Gemini API)**  
-- Answers user queries related to blood requirements and accident reporting.  
-- Provides real-time information and guidance.  
-
 ---
 
 ## **🛠 Tech Stack**  
@@ -30,10 +25,10 @@ Additionally, LifeConnect includes an **AI Chatbot powered by Gemini API**, allo
 - HTML, CSS, JavaScript  
 
 ### **Backend:**  
-- Firebase (Firestore, Authentication, Cloud Functions, Cloud Messaging)  
+- Firebase (Firestore, Authentication, Cloud Functions, Cloud Messaging)
+- Python Flask and Twilio
 
 ### **AI & Integrations:**  
-- **Gemini API** (Chatbot for queries)  
 - **Google Maps API** (Location tracking for accident reporting)  
 - **Firebase Cloud Messaging (FCM)** (Emergency alerts)  
 
