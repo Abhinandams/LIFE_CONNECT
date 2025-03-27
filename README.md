@@ -3,8 +3,6 @@
 ## **Project Overview**  
 LifeConnect is an emergency response system designed to assist users in **blood donation requests** and **accident reporting**. It features a **React-based frontend** and a **Firebase-powered backend**, ensuring real-time assistance and seamless communication.  
 
-Additionally, LifeConnect includes an **AI Chatbot powered by Gemini API**, allowing users to ask queries related to blood requirements and accident reporting.  
-
 ---
 
 ## **🚀 Features**  
